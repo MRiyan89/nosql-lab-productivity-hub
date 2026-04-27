@@ -110,16 +110,127 @@ const { ObjectId } = require('mongodb');
       createdAt: new Date()
     },
   ]);
-  const t1 = new ObjectId();
-  const t2 = new ObjectId();
-  const t3 = new ObjectId();
-  const t4 = new ObjectId();
-  const t5 = new ObjectId();
 
   await db.collection('tasks').insertMany([
     {
-      _id: t1,
+      _id: new ObjectId(),
+      userId: u1,
+      projectId: p1,
+      title: 'Design homepage mockup',
+      status: 'todo',
+      priority: 2,
+      tags: ['design', 'urgent'],
+      subtasks: [
+        { title: 'Wireframe', completed: false },
+        { title: 'Color palette', completed: false }
+      ],
+      dueDate: new Date('2025-06-01'),
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u1,
+      projectId: p3,
+      title: 'Write project report',
+      status: 'in-progress',
+      priority: 3,
+      tags: ['writing'],
+      subtasks: [
+        { title: 'Outline sections', completed: true },
+        { title: 'Draft introduction', completed: false }
+      ],
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u2,
+      projectId: p2,
+      title: 'Set up database',
+      status: 'done',
+      priority: 1,
+      tags: ['backend', 'setup'],
+      subtasks: [
+        { title: 'Install MongoDB', completed: true },
+        { title: 'Create collections', completed: true }
+      ],
+      dueDate: new Date('2025-05-10'),
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u2,
+      projectId: p4,
+      title: 'Build REST API',
+      status: 'todo',
+      priority: 3,
+      tags: ['backend', 'api'],
+      subtasks: [
+        { title: 'Define routes', completed: false },
+        { title: 'Write controllers', completed: false },
+        { title: 'Test endpoints', completed: false }
+      ],
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u1,
+      projectId: p1,
+      title: 'Write unit tests',
+      status: 'todo',
+      priority: 2,
+      tags: ['testing'],
+      subtasks: [
+        { title: 'Setup jest', completed: true },
+        { title: 'Write test cases', completed: false }
+      ],
+      dueDate: new Date('2025-07-01'),
+      createdAt: new Date()
+    }
+  ]);
 
+  await db.collection('notes').insertMany([
+    {
+      _id: new ObjectId(),
+      userId: u1,
+      projectId: p1,
+      title: 'Design inspiration',
+      body: 'Look at Dribbble for homepage ideas.',
+      tags: ['design', 'research'],
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u1,
+      projectId: p3,
+      title: 'Report structure',
+      body: 'Introduction, methodology, results, conclusion.',
+      tags: ['writing'],
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u1,
+      title: 'Book recommendations',
+      body: 'Clean Code, The Pragmatic Programmer.',
+      tags: ['reading'],
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u2,
+      projectId: p2,
+      title: 'Database schema notes',
+      body: 'Use ObjectId references for all relationships.',
+      tags: ['backend', 'database'],
+      createdAt: new Date()
+    },
+    {
+      _id: new ObjectId(),
+      userId: u2,
+      title: 'Meeting notes',
+      body: 'Discussed Q3 goals with the team.',
+      tags: ['meetings'],
+      createdAt: new Date()
     }
   ]);
   console.log('TODO: implement seed.js');
