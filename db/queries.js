@@ -44,7 +44,13 @@ const { ObjectId } = require('mongodb');
  * Hint: insertOne. Nothing fancy.
  */
 async function signupUser(db, userData) {
-  // TODO: implement
+  const result = await db.collection('users').insertOne({
+    email: userData.email,
+    passwordHash: userData.passwordHash,
+    name: userData.name,
+    createdAt: new Date()
+  });
+  return result;
   throw new Error('signupUser not implemented');
 }
 
@@ -64,7 +70,7 @@ async function signupUser(db, userData) {
  * Hint: findOne with an exact-match filter.
  */
 async function loginFindUser(db, email) {
-  // TODO: implement
+  return await db.collection('users').findOne({ email: email });
   throw new Error('loginFindUser not implemented');
 }
 
@@ -84,7 +90,10 @@ async function loginFindUser(db, email) {
  * Hint: find with two filter conditions, then .sort().toArray().
  */
 async function listUserProjects(db, ownerId) {
-  // TODO: implement
+  return await db.collection('projects')
+    .find({ userId: ownerId, status: false })
+    .sort({ createdAt: -1 })
+    .toArray();
   throw new Error('listUserProjects not implemented');
 }
 
@@ -102,7 +111,14 @@ async function listUserProjects(db, ownerId) {
  * Hint: insertOne again — just remember to add the defaults yourself.
  */
 async function createProject(db, projectData) {
-  // TODO: implement
+  const result = await db.collection('projects').insertOne({
+    userId: projectData.userId,
+    name: projectData.name,
+    description: projectData.description,
+    status: false,
+    createdAt: new Date()
+  });
+  return result;
   throw new Error('createProject not implemented');
 }
 
@@ -122,7 +138,11 @@ async function createProject(db, projectData) {
  * Hint: updateOne with the $set operator.
  */
 async function archiveProject(db, projectId) {
-  // TODO: implement
+  const result = await db.collection('projects').updateOne(
+    { _id: projectId },
+    { $set: { status: true } }
+  );
+  return result;
   throw new Error('archiveProject not implemented');
 }
 
@@ -144,7 +164,14 @@ async function archiveProject(db, projectId) {
  *       the caller passed one. Then chain .sort({ priority: -1, createdAt: -1 }).
  */
 async function listProjectTasks(db, projectId, status) {
-  // TODO: implement
+  const filter = { projectId: projectId };
+  if (status) {
+    filter.status = status;
+  }
+  return await db.collection('tasks')
+    .find(filter)
+    .sort({ priority: -1, createdAt: -1 })
+    .toArray();
   throw new Error('listProjectTasks not implemented');
 }
 
@@ -170,7 +197,17 @@ async function listProjectTasks(db, projectId, status) {
  * Hint: insertOne. Apply defaults for any missing optional fields.
  */
 async function createTask(db, taskData) {
-  // TODO: implement
+  const result = await db.collection('tasks').insertOne({
+    userId: taskData.ownerId,
+    projectId: taskData.projectId,
+    title: taskData.title,
+    status: 'todo',
+    priority: taskData.priority || 1,
+    tags: taskData.tags || [],
+    subtasks: taskData.subtasks || [],
+    createdAt: new Date()
+  });
+  return result;
   throw new Error('createTask not implemented');
 }
 
