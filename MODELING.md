@@ -8,10 +8,10 @@
 
 Briefly describe each collection (1–2 sentences each):
 
-- **users** —
-- **projects** —
-- **tasks** —
-- **notes** —
+- **users** — stores the users that have regestered into the system 
+- **projects** — It is a grouping of tasks. Each project belongs to one user and will have an active statud.
+- **tasks** — Represents an individual to-do item belonging to a project and a user.
+- **notes** — Stores text notes written by a user.
 
 ---
 
@@ -32,12 +32,34 @@ For each collection, write the document shape (field name + type + required/opti
 
 ### projects
 ```
-TODO
+{
+  "_id": ObjectId,
+  "userId": "ObjectId (required) — ref: users._id",
+  "name": "string (required)",
+  "description": "string (optional)",
+  "Status": "boolean (required, default: false)",
+  "createdAt": "Date (required)"
+}
 ```
 
 ### tasks
 ```
-TODO
+{
+  "_id": ObjectId,
+  "projectId": "ObjectId (required) — ref: projects._id",
+  "userId": "ObjectId (required) — ref: users._id",
+  "title": "string (required)",
+  "status": "string (required) — enum: 'todo' | 'in-progress' | 'done'",
+  "tags": ["string (optional array)"],
+  "subtasks": [
+    {
+      "title": "string (required)",
+      "completed": "boolean (required, default: false)"
+    }
+  ],
+  "dueDate": "Date (optional)",
+  "createdAt": "Date (required)"
+}
 ```
 
 ### notes
