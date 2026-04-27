@@ -64,7 +64,15 @@ For each collection, write the document shape (field name + type + required/opti
 
 ### notes
 ```
-TODO
+{
+  "_id": ObjectId,
+  "userId": "ObjectId (required) — ref: users._id",
+  "projectId": "ObjectId (optional) — ref: projects._id",
+  "title": "string (required)",
+  "body": "string (required)",
+  "tags": ["string (optional array)"],
+  "createdAt": "Date (required)"
+}
 ```
 
 ---
@@ -75,10 +83,10 @@ For each relationship, state whether you embedded or referenced, and **why** (on
 
 | Relationship                       | Embed or Reference? | Why? |
 |-----------------------------------|---------------------|------|
-| Subtasks inside a task            |                     |      |
-| Tags on a task                    |                     |      |
-| Project → Task ownership          |                     |      |
-| Note → optional Project link      |                     |      |
+| Subtasks inside a task            |        embedded     | Subtasks are always fetched with their parent task. so, embedding avoids a separate query.     |
+| Tags on a task                    |        embedded     | Tags are plain strings, not shared entities, so there is nothing to reference.     |
+| Project → Task ownership          |       reference     | A project can own many tasks over time - referencing via projectId on the task prevents unbounded document growth on the project.     |
+| Note → optional Project link      |       reference     | notes have the project_id and with that we can access the project link     |
 
 ---
 
@@ -86,4 +94,4 @@ For each relationship, state whether you embedded or referenced, and **why** (on
 
 Name one field that exists on **some** documents but not **all** in the same collection. Explain why this is acceptable (or even useful) in MongoDB.
 
-> _Your answer here._
+> The projectId field on a **note** document exists only when a note is linked to a project - notes without a project simply omit the field entirely. This is acceptable in MongoDB because the document model does not require every document in a collection to share the same shape.
