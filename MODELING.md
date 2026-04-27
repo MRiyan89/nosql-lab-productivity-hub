@@ -33,45 +33,46 @@ For each collection, write the document shape (field name + type + required/opti
 ### projects
 ```
 {
-  "_id": ObjectId,
-  "userId": "ObjectId (required) — ref: users._id",
-  "name": "string (required)",
-  "description": "string (optional)",
-  "Status": "boolean (required, default: false)",
-  "createdAt": "Date (required)"
+  _id: ObjectId,
+  userId: ObjectId (required) — ref: users._id,
+  name: string (required),
+  description: string (optional),
+  Status: boolean (required, default: false),
+  createdAt: Date (required)
 }
 ```
 
 ### tasks
 ```
 {
-  "_id": ObjectId,
-  "projectId": "ObjectId (required) — ref: projects._id",
-  "userId": "ObjectId (required) — ref: users._id",
-  "title": "string (required)",
-  "status": "string (required) — enum: 'todo' | 'in-progress' | 'done'",
-  "tags": ["string (optional array)"],
-  "subtasks": [
+  _id: ObjectId,
+  projectId: ObjectId (required) — ref: projects._id,
+  userId: ObjectId (required) — ref: users._id,
+  title: string (required),
+  status: string (required) — enum: 'todo' | 'in-progress' | 'done',
+  priority: number (optional)
+  tags: [string (optional array)],
+  subtasks: [
     {
-      "title": "string (required)",
-      "completed": "boolean (required, default: false)"
+      title: string (required),
+      completed: boolean (required, default: false)
     }
   ],
-  "dueDate": "Date (optional)",
-  "createdAt": "Date (required)"
+  dueDate: Date (optional),
+  createdAt: Date (required)
 }
 ```
 
 ### notes
 ```
 {
-  "_id": ObjectId,
-  "userId": "ObjectId (required) — ref: users._id",
-  "projectId": "ObjectId (optional) — ref: projects._id",
-  "title": "string (required)",
-  "body": "string (required)",
-  "tags": ["string (optional array)"],
-  "createdAt": "Date (required)"
+  _id: ObjectId,
+  userId: ObjectId (required) — ref: users._id,
+  projectId: ObjectId (optional) — ref: projects._id,
+  title: "string (required),
+  body: string (required),
+  tags: [string (optional array)],
+  createdAt: Date (required)
 }
 ```
 
