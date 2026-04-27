@@ -198,7 +198,7 @@ async function listProjectTasks(db, projectId, status) {
  */
 async function createTask(db, taskData) {
   const result = await db.collection('tasks').insertOne({
-    userId: taskData.ownerId,
+    userId: taskData.userId,
     projectId: taskData.projectId,
     title: taskData.title,
     status: 'todo',
