@@ -114,8 +114,8 @@ const { ObjectId } = require('mongodb');
   await db.collection('tasks').insertMany([
     {
       _id: new ObjectId(),
-      userId: u1,
       projectId: p1,
+      userId: u1,
       title: 'Design homepage mockup',
       status: 'todo',
       priority: 2,
@@ -129,8 +129,8 @@ const { ObjectId } = require('mongodb');
     },
     {
       _id: new ObjectId(),
-      userId: u1,
       projectId: p3,
+      userId: u1,
       title: 'Write project report',
       status: 'in-progress',
       priority: 3,
@@ -143,8 +143,8 @@ const { ObjectId } = require('mongodb');
     },
     {
       _id: new ObjectId(),
-      userId: u2,
       projectId: p2,
+      userId: u2,
       title: 'Set up database',
       status: 'done',
       priority: 1,
@@ -158,8 +158,8 @@ const { ObjectId } = require('mongodb');
     },
     {
       _id: new ObjectId(),
-      userId: u2,
       projectId: p4,
+      userId: u2,
       title: 'Build REST API',
       status: 'todo',
       priority: 3,
@@ -173,8 +173,8 @@ const { ObjectId } = require('mongodb');
     },
     {
       _id: new ObjectId(),
-      userId: u1,
       projectId: p1,
+      userId: u1,
       title: 'Write unit tests',
       status: 'todo',
       priority: 2,
