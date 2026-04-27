@@ -112,7 +112,7 @@ async function listUserProjects(db, ownerId) {
  */
 async function createProject(db, projectData) {
   const result = await db.collection('projects').insertOne({
-    userId: projectData.userId,
+    userId: projectData.ownerId,
     name: projectData.name,
     description: projectData.description,
     status: false,
@@ -198,7 +198,7 @@ async function listProjectTasks(db, projectId, status) {
  */
 async function createTask(db, taskData) {
   const result = await db.collection('tasks').insertOne({
-    userId: taskData.userId,
+    userId: taskData.ownerId,
     projectId: taskData.projectId,
     title: taskData.title,
     status: 'todo',
